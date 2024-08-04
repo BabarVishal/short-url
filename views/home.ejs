@@ -1,50 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-        body {
-            font-family: 'Courier New', Courier, monospace;
-        }
-    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Short-URL</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 2.5em;
+            color: #61dafb;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #2c2c2c;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .form-group input {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+        }
+
+        .form-group button {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #61dafb;
+            color: #1a1a1a;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .form-group button:hover {
+            background-color: #21a1f1;
+            transform: scale(1.05);
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #444;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #2a2a2a;
+        }
+
+        @media (max-width: 600px) {
+            .form-group {
+                width: 100%;
+            }
+
+            .form-group input, .form-group button {
+                width: 100%;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>URL-shortener</h1>
-    <% if (locals.id) { %>
-     <p>Url Generated: http://localhost:8001/url/<%= id %></p>
-    <% } %>
-    <div>
-       <form method="post" action="/url" >
-        <label>Enter Your Orininal Url</label>
-        <input type="text" name="url" placeholder="https://example.com"/>
-        <br>
-        <br>
-        <button type="submit">Generate</button>
-       </form>
-    </div>
-    <div>
+    <h1>URL Shortener</h1>
+    <div class="container">
+        <% if (locals.id) { %>
+            <p>Url Generated: <a href="http://localhost:8001/url/<%= id %>" style="color: #61dafb;">http://localhost:8001/url/<%= id %></a></p>
+        <% } %>
+        <div class="form-group">
+            <form method="post" action="/url">
+                <label for="url">Enter Your Original URL:</label>
+                <input type="text" id="url" name="url" placeholder="https://example.com" required />
+                <button type="submit">Generate</button>
+            </form>
+        </div>
         <% if (locals.urls) { %>
-          <table style="padding: 20px;">
-            <thead style="margin: 20px;">
-                <th style="padding-left: 50px;">s. no</th>
-                <th style="padding-left: 50px;">shortId</th>
-                <th style="padding-left: 50px;" >redirect</th>
-                <th style="padding-left: 50px;">clicks</th>
-            </thead>
-            <tbody style="padding: 20px; margin-left: 20px;">
-                <% urls.forEach((url, index) => { %>
-                    <tr>
-                        <td style="padding-left: 50px;"><%= index + 1 %></td>
-                        <td style="padding-left: 50px;"><%= url.shortId%></td>
-                        <td style="padding-left: 50px;"><%= url.redirectURL%></td>
-                        <td style="padding-left: 50px;"><%= url.visitHistory.length%></td>
-                    </tr>
-               
-                <% }) %>
-            </tbody>
-          </table>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S. No</th>
+                            <th>Short ID</th>
+                            <th>Redirect URL</th>
+                            <th>Clicks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% urls.forEach((url, index) => { %>
+                            <tr>
+                                <td><%= index + 1 %></td>
+                                <td><%= url.shortId %></td>
+                                <td><%= url.redirectURL %></td>
+                                <td><%= url.visitHistory.length %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
         <% } %>
     </div>
 </body>
