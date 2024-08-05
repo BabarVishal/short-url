@@ -3,6 +3,7 @@ const { connectToMongoDB } = require("./connect");
 const urlRoute = require("./routes/url");
 const URL = require("./models/url");
 const staticROutes = require("./routes/stasticROuter")
+const userRoutes = require("./routes/user")
 
 //For Frentend...
 const path = require("path");
@@ -25,6 +26,7 @@ app.use(express.urlencoded({extended: false}));
 
 //routes
 app.use("/url", urlRoute);
+app.use("/user", userRoutes)
 
 //staticROutes
 app.use("/", staticROutes)
