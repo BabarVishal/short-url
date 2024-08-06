@@ -5,7 +5,7 @@ const URL = require("./models/url");
 const staticROutes = require("./routes/stasticROuter")
 const userRoutes = require("./routes/user")
 const cookieparser = require("cookie-parser")
-const {restrictToLoginUserOnly} = require("./middleware/auth")
+const {restrictToLoginUserOnly, checkAuth} = require("./middleware/auth")
 //For Frentend...
 const path = require("path");
 
@@ -31,7 +31,7 @@ app.use("/url",restrictToLoginUserOnly, urlRoute);
 app.use("/user", userRoutes)
 
 //staticROutes
-app.use("/", staticROutes)
+app.use("/",checkAuth, staticROutes)
 
 app.get("/url/:shortId", async (req, res) => {
   const shortId = req.params.shortId;
