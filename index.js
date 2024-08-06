@@ -4,7 +4,8 @@ const urlRoute = require("./routes/url");
 const URL = require("./models/url");
 const staticROutes = require("./routes/stasticROuter")
 const userRoutes = require("./routes/user")
-
+const cookieparser = require("cookie-parser")
+const {restrictToLoginUserOnly} = require("./middleware/auth")
 //For Frentend...
 const path = require("path");
 
@@ -23,9 +24,10 @@ app.set("views", path.resolve("./views"));
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.use(cookieparser());
 
 //routes
-app.use("/url", urlRoute);
+app.use("/url",restrictToLoginUserOnly, urlRoute);
 app.use("/user", userRoutes)
 
 //staticROutes
