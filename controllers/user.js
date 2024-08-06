@@ -23,9 +23,9 @@ async function handelUserLogin(req, res) {
     error: "Invalid Username and password",
   })
      
-  const sessionId = uuidv4();
-  setUser(sessionId, user);
-  res.cookie("uid", sessionId)
+
+  const token = setUser(user);
+  res.cookie("uid", token)
 
     console.log("login success", user)
     return res.redirect("/")
