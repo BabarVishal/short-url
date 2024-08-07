@@ -23,10 +23,9 @@ async function handelUserLogin(req, res) {
    })
      
   const token = setUser(user);
-  res.cookie("uid", token)
-
-    console.log("login success", user)
-    return res.redirect("/")
+  res.cookie("token", token)
+  console.log("login success", user)
+  return res.redirect("/")
 }
 
 

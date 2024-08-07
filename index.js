@@ -2,11 +2,12 @@ const express = require("express");
 const { connectToMongoDB } = require("./connect");
 const urlRoute = require("./routes/url");
 const URL = require("./models/url");
-const staticROutes = require("./routes/stasticROuter")
-const userRoutes = require("./routes/user")
-const cookieparser = require("cookie-parser")
-const {restrictToLoginUserOnly, checkAuth} = require("./middleware/auth")
-//For Frentend...
+const staticRoutes = require("./routes/stasticROuter"); // Fixed typo in the file name
+const userRoutes = require("./routes/user");
+const cookieParser = require("cookie-parser");
+const { checkForAuthentication, restrictTo } = require("./middleware/auth"); // Correct spelling
+
+// For Frontend...
 const path = require("path");
 
 const app = express();
@@ -16,22 +17,22 @@ connectToMongoDB("mongodb://127.0.0.1:27017/my-Url").then(() =>
   console.log("Mongodb connected")
 );
 
-//For Frentend...
+// For Frontend...
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
-
-//middleware
+// Middleware
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-app.use(cookieparser());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(checkForAuthentication);
 
-//routes
-app.use("/url",restrictToLoginUserOnly, urlRoute);
-app.use("/user", userRoutes)
+// Routes
+app.use("/url", restrictTo(["NORMAL", "ADMIN"]), urlRoute); // Correct spelling
+app.use("/user", userRoutes);
 
-//staticROutes
-app.use("/",checkAuth, staticROutes)
+// Static Routes
+app.use("/", staticRoutes);
 
 app.get("/url/:shortId", async (req, res) => {
   const shortId = req.params.shortId;
