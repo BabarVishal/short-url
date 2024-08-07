@@ -7,8 +7,8 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #1a1a1a;
-            color: #f0f0f0;
+            background-color: #1e1e2f;
+            color: #dcdcdc;
             margin: 0;
             padding: 0;
             display: flex;
@@ -20,29 +20,28 @@
             margin: 20px 0;
             font-size: 2.5em;
             margin-top: 100px;
-            color: #61dafb;
+            color: #00d4ff;
         }
 
         nav {
             width: 100%;
-            background-color: transparent; /* Make navbar transparent */
+            background-color: #27293d;
             padding: 10px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: none; /* Remove shadow if desired */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             position: fixed;
             top: 0;
             left: 0;
             z-index: 1000;
-           
         }
 
         nav h1 {
             margin: 0;
             padding-left: 20px;
             font-size: 1.5em;
-            color: #61dafb;
+            color: #00d4ff;
         }
 
         nav button {
@@ -50,15 +49,15 @@
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            background-color: #61dafb;
-            color: #1a1a1a;
+            background-color: #00d4ff;
+            color: #27293d;
             font-size: 1em;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
         }
 
         nav button:hover {
-            background-color: #21a1f1;
+            background-color: #00a3cc;
             transform: scale(1.05);
         }
 
@@ -66,10 +65,10 @@
             width: 90%;
             max-width: 800px;
             padding: 20px;
-            background-color: #2c2c2c;
+            background-color: #2a2a3d;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-            margin-top: 0px; /* Adjust margin to avoid overlap with navbar */
+            margin-top: 0px;
         }
 
         .form-group {
@@ -91,7 +90,7 @@
             margin: 5px 0;
             border: 1px solid #555;
             border-radius: 5px;
-            background-color: #444;
+            background-color: #39395d;
             color: #fff;
         }
 
@@ -102,15 +101,15 @@
             margin: 5px 0;
             border: none;
             border-radius: 5px;
-            background-color: #61dafb;
-            color: #1a1a1a;
+            background-color: #00d4ff;
+            color: #27293d;
             font-size: 1em;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
         }
 
         .form-group button:hover {
-            background-color: #21a1f1;
+            background-color: #00a3cc;
             transform: scale(1.05);
         }
 
@@ -169,7 +168,7 @@
     <h1>URL Shortener</h1>
     <div class="container">
         <% if (locals.id) { %>
-            <p>Url Generated: <a href="http://localhost:8001/url/<%= id %>" style="color: #61dafb;">http://localhost:8001/url/<%= id %></a></p>
+            <p>Url Generated: <a href="http://localhost:8001/url/<%= id %>" style="color: #00d4ff;">http://localhost:8001/url/<%= id %></a></p>
         <% } %>
         <div class="form-group">
             <form method="post" action="/url">
@@ -205,3 +204,4 @@
     </div>
 </body>
 </html>
+
