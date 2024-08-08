@@ -11,3 +11,14 @@ A short URL service, offers several benefits and uses:
 5. Mitigating Link Rot: By using a short URL service, the link can be updated to point to a new URL if the original content moves, reducing the impact of broken links over time.
 
 6. Enhanced Security: Some short URL services offer features to detect and prevent phishing attacks, ensuring that users are directed to safe sites.
+
+
+
+*** How To use ***
+Step 1. signup 
+Step 2. login
+step 3. Give the Orignal URL;
+step 4. click the GENERATE!
+step 5. click the generated URL for it`s working or not!
+step 6. get back and refresh
+
